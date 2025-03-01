@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'user.apps.UserConfig',
 ]
 
 MIDDLEWARE = [
@@ -115,9 +116,26 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
+import os
+
+# Static files (CSS, JavaScript, Images)
+STATIC_URL = '/static/'
+
+# Location for static files during development
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'user/static'),  # Path to your app's static files
+]
+
+# Location for collected static files during production
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+AUTHENTICATION_BACKENDS = [
+    'user.backends.UserProfileBackend',  # Add your custom backend
+    'django.contrib.auth.backends.ModelBackend',  # Default backend (optional)
+]
