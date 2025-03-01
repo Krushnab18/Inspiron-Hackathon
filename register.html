@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Registration</title>
+    <style>
+               body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            width: 40%;
+            max-width: 600px;
+            padding: 30px;
+            background: white;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h2 { margin-bottom: 20px; }
+        label { display: block; margin-top: 10px; text-align: left; width: 95%; }
+        input, select, textarea {
+            width: 95%;
+            padding: 12px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            width: 48%;
+            padding: 12px;
+            margin-top: 20px;
+            background: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+        button:hover { background: #0056b3; }
+        .hidden { display: none; }
+        @media (max-width: 768px) {
+            .container {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Business Registration</h2>
+        <form id="registerForm">
+            <div id="section1">
+                <h3>User Details</h3>
+                <label>Full Name:</label>
+                <input type="text" id="name" required>
+                <label>Email:</label>
+                <input type="email" id="email" required>
+                <label>Phone Number:</label>
+                <input type="tel" id="phone" required>
+                <label>Password:</label>
+                <input type="password" id="password" required>
+                <label>Confirm Password:</label>
+                <input type="password" id="confirmPassword" required>
+                <button type="button" onclick="validateAndNext(1)">Next</button>
+            </div>
+            <div id="section2" class="hidden">
+                <h3>Business Details</h3>
+                <label>Business Name:</label>
+                <input type="text" id="businessName" required>
+                <label>Business Type:</label>
+                <select id="businessType" required>
+                    <option value="">Select</option>
+                    <option value="IT">IT</option>
+                    <option value="Retail">Retail</option>
+                    <option value="Manufacturing">Manufacturing</option>
+                </select>
+                <label>Company Registration Number:</label>
+                <input type="text" id="registrationNumber" required>
+                <label>Business Address:</label>
+                <input type="text" id="address" required>
+                <label>Website (Optional):</label>
+                <input type="url" id="website">
+                <label>Business Description:</label>
+                <textarea id="description" required></textarea>
+                <label>Upload Business Logo:</label>
+                <input type="file" id="logo">
+                <button type="button" onclick="prevSection(2)">Back</button>
+                <button type="button" onclick="validateAndNext(2)">Next</button>
+            </div>
+            <div id="section3" class="hidden">
+                <h3>Additional Questions</h3>
+                <label>Years in Operation:</label>
+                <input type="number" id="years" required>
+                <label>Number of Employees:</label>
+                <input type="number" id="employees" required>
+                <label>Annual Revenue:</label>
+                <select id="annualRevenue" required>
+                    <option value="">Select</option>
+                    <option value="<100K">Less than $100K</option>
+                    <option value="100K-500K">$100K - $500K</option>
+                    <option value="500K-1M">$500K - $1M</option>
+                    <option value=">1M">More than $1M</option>
+                </select>
+                <label>What services/products do you offer?</label>
+                <textarea id="services" required></textarea>
+                <label>Any special requirements or needs?</label>
+                <textarea id="specialRequirements"></textarea>
+                <button type="button" onclick="prevSection(3)">Back</button>
+                <button type="submit">Register</button>
+            </div>
+        </form>
+    </div>
+    <script>
+        function validateAndNext(current) {
+            let section = document.getElementById(`section${current}`);
+            let inputs = section.querySelectorAll("input[required], select[required], textarea[required]");
+            for (let input of inputs) {
+                if (!input.value.trim()) {
+                    alert("Please fill all required fields.");
+                    return;
+                }
+            }
+            document.getElementById(`section${current}`).classList.add("hidden");
+            document.getElementById(`section${current + 1}`).classList.remove("hidden");
+        }
+        function prevSection(current) {
+            document.getElementById(`section${current}`).classList.add("hidden");
+            document.getElementById(`section${current - 1}`).classList.remove("hidden");
+        }
+        document.getElementById("registerForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const password = document.getElementById("password").value;
+            const confirmPassword = document.getElementById("confirmPassword").value;
+            if (password !== confirmPassword) {
+                alert("Passwords do not match.");
+                return;
+            }
+            alert("Registration Successful!");
+        });
+    </script>
+</body>
+</html>
