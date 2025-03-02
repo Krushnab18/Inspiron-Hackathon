@@ -1,12 +1,30 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>Financial Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script defer src="{% static 'user/js/dashboard.js' %}"></script>
 </head>
 <body>
-    <h1>Welcome to the Dashboard!</h1>
-    <p>You are now logged in.</p>
+    <h1>Financial Dashboard</h1>
+
+    <!-- Sales Chart -->
+    <div>
+        <h2>Sales Forecast</h2>
+        <canvas id="salesChart"></canvas>
+    </div>
+
+    <!-- Key Metrics -->
+    <div>
+        <h3>Total Revenue: <span id="totalRevenue">Loading...</span></h3>
+        <h3>Total COGS: <span id="totalCOGS">Loading...</span></h3>
+        <h3>Total Profit: <span id="totalProfit">Loading...</span></h3>
+        <h3>Gross Profit Margin: <span id="grossProfitMargin">Loading...</span></h3>
+        <h3>Net Profit Margin: <span id="netProfitMargin">Loading...</span></h3>
+        <h3>COGS % of Revenue: <span id="cogsPercentage">Loading...</span></h3>
+    </div>
 </body>
 </html>

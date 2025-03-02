@@ -226,3 +226,46 @@ button:hover{
         font-size: 0.9rem;
     }
 }
+
+
+/* File upload specific styling */
+.file-upload-group input[type="file"] {
+    padding: 10px 10px 10px 40px;
+    cursor: pointer;
+}
+
+.file-upload-group input[type="file"]::file-selector-button {
+    display: none; /* Hide the default file upload button */
+}
+
+.file-upload-group label {
+    cursor: pointer;
+}
+
+.file-upload-group i {
+    color: #888;
+}
+
+
+/* Message styling */
+.messages {
+    margin-bottom: 20px;
+}
+
+.alert {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.alert-error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
