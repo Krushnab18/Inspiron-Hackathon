@@ -3,6 +3,7 @@ from .models import UserProfile
 
 class UserProfileForm(forms.ModelForm):
     password_confirmation = forms.CharField(widget=forms.PasswordInput)
+    financial_data_file = forms.FileField(required=False)  # Add a file upload field
 
     class Meta:
         model = UserProfile
