@@ -28,3 +28,7 @@ class UserProfileAdmin(admin.ModelAdmin):
 
     # Make the password field read-only in the admin panel
     readonly_fields = ('password',)
+
+    # Restrict access to only superusers
+    def has_module_permission(self, request):
+        return request.user.is_superuser

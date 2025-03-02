@@ -139,3 +139,5 @@ AUTHENTICATION_BACKENDS = [
     'user.backends.UserProfileBackend',  # Add your custom backend
     'django.contrib.auth.backends.ModelBackend',  # Default backend (optional)
 ]
+
+AUTH_USER_MODEL = 'user.UserProfile'

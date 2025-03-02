@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from .models import UserProfile
 from django.contrib.auth.hashers import make_password
 from django.views.decorators.cache import never_cache
+from django.contrib.auth.decorators import login_required
 
 def register(request):
     if request.method == 'POST':
@@ -30,13 +31,15 @@ def register(request):
 
         # Log the user in
         login(request, user)
-        return redirect('login')  # Redirect to the dashboard after registration
-    else :
-        return render(request, 'register.html')
+        return redirect('login')
+        return render(request, 'login.html')
 
 
 @never_cache
 def user_login(request):
+    if request.user.is_authenticated:
+        logout(request)
+
     if request.method == 'POST':
         email = request.POST['email']
         password = request.POST['password']
@@ -48,5 +51,12 @@ def user_login(request):
             return render(request, 'login.html', {'error': 'Invalid email or password'})
     return render(request, 'login.html')
 
+
+@login_required
 def dashboard(request):
     return render(request, 'dashboard.html')
+
+@login_required
+def user_logout(request):
+    logout(request)
+    return redirect('login')  # Redirect to the login page after logout

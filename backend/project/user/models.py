@@ -1,57 +1,58 @@
+# accounts/models.py
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.db import models
-from django.core.validators import MinValueValidator
 from django.utils import timezone
+from django.contrib.auth.models import BaseUserManager
 
-# Choices for industry
-INDUSTRY_CHOICES = [
-    ('retail', 'Retail'),
-    ('ecommerce', 'E-Commerce'),
-    ('manufacturing', 'Manufacturing'),
-    ('other', 'Other'),
-]
+class UserProfileManager(BaseUserManager):
+    def create_user(self, email, name, password=None, **extra_fields):
+        if not email:
+            raise ValueError('The Email field must be set')
+        email = self.normalize_email(email)
+        user = self.model(email=email, name=name, **extra_fields)
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
 
-# Choices for company size
-COMPANY_SIZE_CHOICES = [
-    ('small', 'Small'),
-    ('medium', 'Medium'),
-    ('large', 'Large'),
-]
+    def create_superuser(self, email, name, password=None, **extra_fields):
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
 
-# Choices for role
-ROLE_CHOICES = [
-    ('ceo', 'CEO'),
-    ('finance_manager', 'Finance Manager'),
-    ('other', 'Other'),
-]
+        if extra_fields.get('is_staff') is not True:
+            raise ValueError('Superuser must have is_staff=True.')
+        if extra_fields.get('is_superuser') is not True:
+            raise ValueError('Superuser must have is_superuser=True.')
 
-class UserProfile(models.Model):
-    name = models.CharField(max_length=100, verbose_name="Full Name")
-    email = models.EmailField(unique=True, verbose_name="Email Address")
-    password = models.CharField(max_length=128, verbose_name="Password")  # Store hashed passwords
-    password_confirmation = models.CharField(max_length=128, verbose_name="Confirm Password")  # For validation only
-    company_name = models.CharField(max_length=100, verbose_name="Company Name")
-    industry = models.CharField(max_length=50, choices=INDUSTRY_CHOICES, verbose_name="Industry")
-    company_size = models.CharField(max_length=50, choices=COMPANY_SIZE_CHOICES, verbose_name="Company Size")
-    annual_revenue = models.DecimalField(
-        max_digits=15, 
-        decimal_places=2, 
-        validators=[MinValueValidator(0)], 
-        verbose_name="Annual Revenue"
-    )
-    role = models.CharField(max_length=50, choices=ROLE_CHOICES, verbose_name="Role")
+        return self.create_user(email, name, password, **extra_fields)
 
-     # Required fields for Django's authentication system
-    last_login = models.DateTimeField(default=timezone.now)
-    is_active = models.BooleanField(default=True)
-    is_staff = models.BooleanField(default=False)
-    is_superuser = models.BooleanField(default=False)
+    def get_by_natural_key(self, email):
+        return self.get(email=email)
+
+
+
+class UserProfile(AbstractBaseUser, PermissionsMixin):
+    email = models.EmailField(unique=True)
+    name = models.CharField(max_length=100)
+    password = models.CharField(max_length=128)
+    company_name = models.CharField(max_length=100)
+    industry = models.CharField(max_length=50)
+    company_size = models.CharField(max_length=50)
+    annual_revenue = models.DecimalField(max_digits=15, decimal_places=2, null=True,  blank=True)
+    role = models.CharField(max_length=50)
+
+    # Required fields for Django's authentication system
+    is_staff = models.BooleanField(default=False)  # Controls admin access
+    is_active = models.BooleanField(default=True)  # Required for all users
+    date_joined = models.DateTimeField(default=timezone.now)  # Optional but recommended
 
     USERNAME_FIELD = 'email'  # Use email as the unique identifier
     REQUIRED_FIELDS = ['name']  # Fields required when creating a user
 
-    def __str__(self):
-        return self.email  # Display email as the identifier in the admin panel
+    objects = UserProfileManager()  # Assign the custom manager
 
-    class Meta:
-        verbose_name = "User Profile"
-        verbose_name_plural = "User Profiles"
+    def __str__(self):
+        return self.email
+
+    # Required method for admin access
+    def has_module_perms(self, app_label):
+        return self.is_staff  # Only staff users have admin access
