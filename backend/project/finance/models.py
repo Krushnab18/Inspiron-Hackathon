@@ -21,3 +21,14 @@ class FinancialData(models.Model):
 
     def __str__(self):
         return f"{self.date} - {self.product}"
+
+
+class ForecastData(models.Model):
+    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+    date = models.DateField()
+    sales_forecast = models.FloatField(null=True, blank=True)
+    cogs_forecast = models.FloatField(null=True, blank=True)
+    profit_forecast = models.FloatField(null=True, blank=True)
+
+    class Meta:
+        unique_together = ('user', 'date')  # Avoid duplicates
