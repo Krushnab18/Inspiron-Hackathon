@@ -29,7 +29,7 @@ def register(request):
                 # Validate file extension
                 if not financial_data_file.name.endswith('.csv'):
                     messages.error(request, "Invalid file format. Please upload a CSV file.")
-                    return render(request, 'login.html', {'form': form})
+                    return render(request, 'register.html', {'form': form})
 
                 # Validate CSV file structure
                 try:
@@ -45,7 +45,7 @@ def register(request):
                     if not all(column in reader.fieldnames for column in required_columns):
                         messages.error(request, "Invalid CSV format. Missing required columns.")
                         print("Invalid csv format")
-                        return render(request, 'login.html', {'form': form})
+                        return render(request, 'register.html', {'form': form})
 
                     # Create FinancialData records for the user
                     for row in reader:
@@ -69,7 +69,7 @@ def register(request):
                 except Exception as e:
                     messages.error(request, f"Error processing CSV file: {str(e)}")
                     print("Invalid csv format")
-                    return render(request, 'login.html', {'form': form})
+                    return render(request, 'register.html', {'form': form})
 
             # Log the user in and redirect to the dashboard
             user.backend = 'user.backends.UserProfileBackend'
@@ -80,7 +80,7 @@ def register(request):
         form = UserProfileForm()
         print("Rendering login.html with form")  # Debug statement
 
-    return render(request, 'login.html', {'form': form})
+    return render(request, 'register.html', {'form': form})
 
 @never_cache
 def user_login(request):
