@@ -11,9 +11,12 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
-
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+# settings.py
+# import os
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "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")
 
 
 # Quick-start development settings - unsuitable for production
@@ -39,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'user.apps.UserConfig',
     'finance.apps.FinanceConfig',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
