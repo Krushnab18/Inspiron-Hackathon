@@ -1,0 +1,33 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz@6..12&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
+
+.header-div {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-left: 1rem;
+	font-family: "Nunito Sans", sans-serif;
+}
+
+.header-title {
+	font-size: 0.8rem;
+	font-weight: 700;
+}
+
+.account-div {
+	display: flex;
+	align-items: center;
+	margin-right: 2rem;
+}
+
+.account-image-div {
+	margin-right: 0.5rem;
+}
+
+.account-image {
+	height: 1.5rem;
+}
+
+.account-name {
+	font-size: 1rem;
+	margin-bottom: 1.7rem;
+}
