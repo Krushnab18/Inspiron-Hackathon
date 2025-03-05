@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wdth,wght,YTLC@0,6..12,75..125,200..1000,440..540;1,6..12,75..125,200..1000,440..540&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Rubik:ital,wght@0,300..900;1,300..900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+.card-container {
+    margin-left: 1rem;
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    width: 10rem;
+    font-family: "Work Sans", sans-serif;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+}
+
+.card-title {
+    color: #6b7280;
+    font-size: 0.7rem;
+    margin: 0;
+}
+
+.icon {
+    color: #9ca3af;
+}
+
+.card-amount {
+    margin-top: 0;
+}
+
+.amount {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin-top: 1rem;
+    margin-bottom: 0;
+}
+
+.card-footer {
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    font-size: 0.6rem;
+    color: #6b7280;
+}
+
+.arrow-icon {
+    margin-right: 0.25rem;
+}
+
+.footer-text {
+    margin-left: 0.25rem;
+}
