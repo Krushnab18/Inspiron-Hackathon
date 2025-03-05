@@ -72,7 +72,7 @@ def generate_insights_with_recommendations(request, user_email):
         "high_return_or_low_profit_products": get_high_return_or_low_profit_products(user_email),
         "sales_spikes_or_drops": detect_sales_spikes_or_drops(user_email),
     }
-
+    print(insights)
     recommendations = []
 
     for category, items in insights.items():
