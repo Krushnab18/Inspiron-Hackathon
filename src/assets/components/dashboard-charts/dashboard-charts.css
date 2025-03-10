@@ -3,8 +3,8 @@
     padding: 0 2vw;
     width: calc(100vw - 4vw);
     gap: 2vw;
-    grid-template-columns: 2fr 1fr;
-    height: 68%;
+    grid-template-columns: 1.8fr 1.2fr;
+    height: 64%;
 }
 
 /* line chart */
@@ -13,7 +13,7 @@
     border-radius: 0.5rem;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     border: 0.5px solid lightgray;
-    font-family: "Poppins", sans-serif;
+    font-family: "Varela Round", sans-serif;
     cursor: pointer;
     height: 100%;
 }
@@ -25,15 +25,16 @@
 }
 
 .line-chart-top-div span {
-    font-size: 2rem;
-    font-family: 'Roboto', sans-serif;
+    font-size: 2.8vh;
     font-weight: 500;
 }
 
 .line-chart-buttons-div {
     display: flex;
     align-items: center;
-    width: 14vw;
+    justify-content: space-around;
+    width: 15vw;
+    height: 6vh;
     background-color: lightgray;
     border-radius: 1rem;
 }
@@ -43,9 +44,10 @@
     color: gray;
     border: none;
     height: 90%;
-    width: 5vw;
+    width: 100%;
     border-radius: 1rem;
     cursor: pointer;
+    margin: 0 0.1vw;
 }
 
 .line-chart-buttons-div button.active {
@@ -63,18 +65,21 @@
     border-radius: 0.5rem;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     border: 0.5px solid lightgray;
-    font-family: "Poppins", sans-serif;
     cursor: pointer;
     display: flex;
-    align-items: center;
-    justify-content: center;
     flex-direction: column;
+    justify-content: space-around;
 }
 
 .pie-chart-title span {
-    font-family: 'Poppins', sans-serif;
-    font-size: 3vh;
-    font-weight: 500;
+    font-family: "Varela Round", sans-serif;
+    font-size: 2.8vh;
+    margin-left: 1vw;
+}
+
+.dashboard-pie-chart-legend {
+    margin-left: 5vw;
+    padding: 5vw;
 }
 
 .item {

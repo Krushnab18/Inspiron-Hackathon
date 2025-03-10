@@ -33,12 +33,13 @@
 .card-top-div {
     display: flex;
     align-items: center;
+    margin: 2vh 0;
 }
 
 .card-top-icon-div {
     display: flex;
-    height: 65%;
-    width: 15%;
+    height: 60%;
+    width: 12%;
     color: #1F61C2;
     background-color: #D7E8F0;
     margin: 6%;
@@ -49,7 +50,7 @@
 }
 
 .card-top-icon {
-    font-size: 4vh;
+    font-size: 3.5vh;
 }
 
 .card-top-title-div span {
@@ -80,7 +81,7 @@
     gap: 1.5vw;
     padding: 2vw;
     justify-items: center;
-    height: 20%;
+    height: 25%;
 }
 
 @media (max-width: 1200px) {
