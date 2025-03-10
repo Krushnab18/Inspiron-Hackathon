@@ -1,0 +1,17 @@
+.dashboard-page {
+    height: 100%;
+}
+
+.dashboard-div {
+    background-color: #F2F7F8;
+    padding-top: 4%;
+    height: 91%;
+    width: 100vw;
+}
+
+.temp {
+    position: fixed;
+    height: 10%;
+    background-color: white;
+    width: 100%;
+}

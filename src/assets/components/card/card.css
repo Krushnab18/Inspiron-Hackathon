@@ -1,0 +1,102 @@
+.card {
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border: 0.5px solid lightgray;
+    display: flex;
+    flex-direction: column;
+    font-family: "Poppins", sans-serif;
+    height: 100%;
+    width: 23vw;
+    cursor: pointer;
+    position: relative;
+}
+
+.div2 {
+    border: 1.5px solid #2563EB;
+    border-radius: 0.5rem;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    transition: all 0.5s ease;
+}
+
+.card:hover .div2 {
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    visibility: visible;
+}
+  
+.card-top-div {
+    display: flex;
+    align-items: center;
+}
+
+.card-top-icon-div {
+    display: flex;
+    height: 65%;
+    width: 15%;
+    color: #1F61C2;
+    background-color: #D7E8F0;
+    margin: 6%;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+    border: 1px solid lightgray;
+}
+
+.card-top-icon {
+    font-size: 4vh;
+}
+
+.card-top-title-div span {
+    color: black;
+    font-weight: 600;
+    font-size: 3vh;
+}
+
+.card-bottom-div {
+    display: flex;
+    padding: 0 0 2vh 1.5vw;
+}
+
+/* add max-width here */
+.card-bottom-title-div span {
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.card-bottom-icon-div {
+    padding: 0.5rem 0.5rem;
+}
+
+/* cards */
+.dashboard-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5vw;
+    padding: 2vw;
+    justify-items: center;
+    height: 20%;
+}
+
+@media (max-width: 1200px) {
+    .dashboard-cards {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 900px) {
+    .dashboard-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .dashboard-cards {
+        grid-template-columns: 1fr;
+    }
+}
