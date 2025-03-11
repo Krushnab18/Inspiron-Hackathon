@@ -11,7 +11,6 @@ from .get_insights import (
     get_high_return_or_low_profit_products,
     detect_sales_spikes_or_drops
 )
-from .llm_service import generate_recommendation
 
 @api_view(['GET'])
 def get_data(request, user_email, data_type):
@@ -28,7 +27,7 @@ def get_data(request, user_email, data_type):
         # Transform data into the format expected by the frontend
         formatted_data = [
             {
-                'date': f"new Date({entry['date'].year}, {entry['date'].month - 1}, {entry['date'].day})",
+                'date': f"new Date({entry['date'].year}, {entry['date'].month}, {entry['date'].day})",
                 'sales': entry.get('sales') or entry.get('sales_forecast'),
                 'cogs': entry.get('cogs') or entry.get('cogs_forecast'),
                 'profit': entry.get('profit') or entry.get('profit_forecast'),
@@ -97,10 +96,9 @@ def generate_insights_with_recommendations(request, user_email):
     for category, items in insights.items():
         for item in items:
             insight_text = f"{category.replace('_', ' ').title()}: {item}"
-            recommendation = generate_recommendation(insight_text)
             recommendations.append({
                 # "insight": insight_text,
-                "recommendation": recommendation
+                "recommendation": insights
             })
 
     return JsonResponse({"recommendations": recommendations})
